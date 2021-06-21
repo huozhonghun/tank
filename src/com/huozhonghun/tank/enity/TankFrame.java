@@ -6,6 +6,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 坦克框架对象
@@ -21,7 +23,9 @@ public class TankFrame extends Frame {
 
 	Tank tank1 = new Tank(150, 150, this);
 
-	Bullet bullet = new Bullet(170, 170, DirectionEnum.DOWN);
+	List<Bullet> bulletList = new ArrayList<Bullet>();
+
+	Bullet bullet = new Bullet(170, 170, DirectionEnum.DOWN, this);
 
 	public TankFrame() {
 		// 窗口大小
@@ -51,7 +55,10 @@ public class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		tank1.paint(g);
-		bullet.paint(g);
+		// 遍历存活子弹
+		for (int i = 0; i < bulletList.size(); i++) {
+			bulletList.get(i).paint(g);
+		}
 	}
 
 	Image offScreenImage = null;
@@ -133,7 +140,6 @@ public class TankFrame extends Frame {
 				if(LM) tank1.setDir(DirectionEnum.LEFT);
 				if(RM) tank1.setDir(DirectionEnum.RIGHT);
 			}
-
 		}
 
 

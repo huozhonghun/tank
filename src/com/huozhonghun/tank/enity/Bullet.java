@@ -29,18 +29,29 @@ public class Bullet {
 	// 默认方向向下
 	private DirectionEnum dir = DirectionEnum.DOWN;
 
-	public Bullet(int x, int y, DirectionEnum dir) {
+	// 对象存活状态
+	private boolean survive = true;
+
+	// 坦克框架
+	private TankFrame tankFrame;
+
+	public Bullet(int x, int y, DirectionEnum dir, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tankFrame = tankFrame;
 	}
 
 	public void paint(Graphics g){
+		if(!survive){
+			// 清理多余对象，防止内存泄漏
+			tankFrame.bulletList.remove(this);
+		}
+
 		// 画出物体的位置和大小
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 //		g.setColor(g.getColor());
-
 		// 判断方向来移动坦克
 		switch (dir) {
 			case UP:
@@ -57,7 +68,8 @@ public class Bullet {
 				break;
 			default: break;
 		}
-
+//		if(x<0 || y<0 || x>800 || y>800) tankFrame.bullet=null;
+		if(x<0 || y<0 || x>800 || y>800) survive = false;
 	}
 
 }

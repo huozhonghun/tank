@@ -78,6 +78,6 @@ public class Tank {
 	// 开火
 	public void fire(){
 		// 20 = 50/2 - 10/2
-		tankFrame.bullet = new Bullet(x + 20, y + 20, dir);
+		tankFrame.bulletList.add(new Bullet(x + 20, y + 20, dir, this.tankFrame));
 	}
 }
