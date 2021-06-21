@@ -26,15 +26,19 @@ public class Tank {
 	// 纵坐标
 	private int y;
 
+	// 坦克框架
+	private TankFrame tankFrame;
+
 	// 默认方向向下
 	private DirectionEnum dir = DirectionEnum.DOWN;
 
 	// 允许移动
 	private boolean moving = false;
 
-	public Tank(int x, int y) {
+	public Tank(int x, int y, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
+		this.tankFrame = tankFrame; // 为了刷新子弹位置
 	}
 
 	public void setDir(DirectionEnum dir) {
@@ -69,5 +73,11 @@ public class Tank {
 				default: break;
 			}
 		}
+	}
+
+	// 开火
+	public void fire(){
+		// 20 = 50/2 - 10/2
+		tankFrame.bullet = new Bullet(x + 20, y + 20, dir);
 	}
 }

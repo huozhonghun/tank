@@ -19,9 +19,9 @@ public class TankFrame extends Frame {
 	private static final int FRAME_HEIGHT = 800;
 
 
-	Tank tank1 = new Tank(50,50);
+	Tank tank1 = new Tank(150, 150, this);
 
-	Bullet bullet = new Bullet(50,50,DirectionEnum.DOWN);
+	Bullet bullet = new Bullet(170, 170, DirectionEnum.DOWN);
 
 	public TankFrame() {
 		// 窗口大小
@@ -115,6 +115,8 @@ public class TankFrame extends Frame {
 				case KeyEvent.VK_DOWN:
 					DM = false;
 					break;
+				case KeyEvent.VK_CONTROL:
+					tank1.fire();
 				default:
 					break;
 			}
