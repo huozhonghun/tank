@@ -16,11 +16,9 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
 
-	Tank tank1 = new Tank(0,0);
-	Tank tank2 = new Tank(100,100);
+	Tank tank1 = new Tank(50,50);
 
-	// 移动
-	private boolean moving = false;
+	Bullet bullet = new Bullet(50,50,DirectionEnum.DOWN);
 
 	public TankFrame() {
 		// 窗口大小
@@ -46,40 +44,78 @@ public class TankFrame extends Frame {
 		});
 	}
 
+	// 画出物体
 	@Override
 	public void paint(Graphics g) {
-		tank1.paint(g, moving);
-		tank2.paint(g,moving);
+		tank1.paint(g);
+		bullet.paint(g);
 	}
 
 	class MyKeyListener extends KeyAdapter {
 
+		boolean UM = false;
+		boolean DM = false;
+		boolean LM = false;
+		boolean RM = false;
+
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int keyCode = e.getKeyCode();
-			moving = true;
+
 			switch(keyCode) {
 				case KeyEvent.VK_LEFT:
-					tank1.setDir(DirectionEnum.LEFT);
+					LM = true;
 					break;
 				case KeyEvent.VK_UP:
-					tank1.setDir(DirectionEnum.UP);
+					UM = true;
 					break;
 				case KeyEvent.VK_RIGHT:
-					tank1.setDir(DirectionEnum.RIGHT);
+					RM = true;
 					break;
 				case KeyEvent.VK_DOWN:
-					tank1.setDir(DirectionEnum.DOWN);
+					DM = true;
 					break;
 				default:
 					break;
 			}
+			setTankDir();
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			moving = false;
+			int keyCode = e.getKeyCode();
+			switch(keyCode) {
+				case KeyEvent.VK_LEFT:
+					LM = false;
+					break;
+				case KeyEvent.VK_UP:
+					UM = false;
+					break;
+				case KeyEvent.VK_RIGHT:
+					RM = false;
+					break;
+				case KeyEvent.VK_DOWN:
+					DM = false;
+					break;
+				default:
+					break;
+			}
+			setTankDir();
 		}
+
+		void setTankDir(){
+			if(!UM && !DM && !LM && !RM){
+				tank1.setMoving(false);
+			}else{
+				tank1.setMoving(true);
+				if(UM) tank1.setDir(DirectionEnum.UP);
+				if(DM) tank1.setDir(DirectionEnum.DOWN);
+				if(LM) tank1.setDir(DirectionEnum.LEFT);
+				if(RM) tank1.setDir(DirectionEnum.RIGHT);
+			}
+
+		}
+
 
 	}
 
