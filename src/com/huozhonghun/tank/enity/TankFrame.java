@@ -15,19 +15,12 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-	// 定义横纵坐标
-	private int x,y=10;
 
-	// 默认方向向下
-	private DirectionEnum dir = DirectionEnum.DOWN;
+	Tank tank1 = new Tank(0,0);
+	Tank tank2 = new Tank(100,100);
 
-	// 默认无操作
-	private Boolean press = false;
-
-	// 每次移动步数
-	private static final int step = 10;
-
-
+	// 移动
+	private boolean moving = false;
 
 	public TankFrame() {
 		// 窗口大小
@@ -55,25 +48,8 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		// 画出物体的位置和大小
-		g.fillRect(x,y,50,50);
-		if(press){
-			// 判断方向来移动坦克
-			switch (dir) {
-				case UP:
-					y -= step;
-					break;
-				case DOWN:
-					y += step;
-					break;
-				case LEFT:
-					x -= step;
-					break;
-				case RIGHT:
-					x += step;
-					break;
-			}
-		}
+		tank1.paint(g, moving);
+		tank2.paint(g,moving);
 	}
 
 	class MyKeyListener extends KeyAdapter {
@@ -81,19 +57,19 @@ public class TankFrame extends Frame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int keyCode = e.getKeyCode();
-			press = true;
+			moving = true;
 			switch(keyCode) {
 				case KeyEvent.VK_LEFT:
-					dir = DirectionEnum.LEFT;
+					tank1.setDir(DirectionEnum.LEFT);
 					break;
 				case KeyEvent.VK_UP:
-					dir = DirectionEnum.UP;
+					tank1.setDir(DirectionEnum.UP);
 					break;
 				case KeyEvent.VK_RIGHT:
-					dir = DirectionEnum.RIGHT;
+					tank1.setDir(DirectionEnum.RIGHT);
 					break;
 				case KeyEvent.VK_DOWN:
-					dir = DirectionEnum.DOWN;
+					tank1.setDir(DirectionEnum.DOWN);
 					break;
 				default:
 					break;
@@ -102,24 +78,7 @@ public class TankFrame extends Frame {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			press = false;
-//			int keyCode = e.getKeyCode();
-//			switch(keyCode) {
-//				case KeyEvent.VK_LEFT:
-//					dir = DirectionEnum.LEFT;
-//					break;
-//				case KeyEvent.VK_UP:
-//					dir = DirectionEnum.UP;
-//					break;
-//				case KeyEvent.VK_RIGHT:
-//					dir = DirectionEnum.RIGHT;
-//					break;
-//				case KeyEvent.VK_DOWN:
-//					dir = DirectionEnum.DOWN;
-//					break;
-//				default:
-//					break;
-//			}
+			moving = false;
 		}
 
 	}
