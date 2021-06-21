@@ -37,13 +37,9 @@ public class Bullet {
 
 	public void paint(Graphics g){
 		// 画出物体的位置和大小
-//		Color color = g.getColor();
-//		color.getRed();
-//		g.fillOval(x,y,width,height);
-//		g.setColor(color);
-		Color c = g.getColor();
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
+//		g.setColor(g.getColor());
 
 		// 判断方向来移动坦克
 		switch (dir) {

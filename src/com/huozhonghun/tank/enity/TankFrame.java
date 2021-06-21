@@ -15,6 +15,9 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+	private static final int FRAME_WIDTH = 800;
+	private static final int FRAME_HEIGHT = 800;
+
 
 	Tank tank1 = new Tank(50,50);
 
@@ -49,6 +52,21 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		tank1.paint(g);
 		bullet.paint(g);
+	}
+
+	Image offScreenImage = null;
+	@Override
+	public void update(Graphics g) {
+		if(offScreenImage == null) {
+			offScreenImage = this.createImage(FRAME_WIDTH, FRAME_HEIGHT);
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 
 	class MyKeyListener extends KeyAdapter {

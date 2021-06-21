@@ -47,7 +47,10 @@ public class Tank {
 
 	public void paint(Graphics g){
 		// 画出物体的位置和大小
+		g.setColor(Color.GREEN);
 		g.fillRect(x,y,WIDTH,HEIGHT);
+//		g.setColor(g.getColor());
+
 		if(moving){
 			// 判断方向来移动坦克
 			switch (dir) {
