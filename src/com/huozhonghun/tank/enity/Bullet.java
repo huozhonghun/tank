@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import java.awt.*;
 
@@ -48,14 +49,29 @@ public class Bullet {
 			tankFrame.bulletList.remove(this);
 		}
 
-		// 画出物体的位置和大小
+/*		// 画出物体的位置和大小
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
-		g.setColor(g.getColor()); // 设置为原来的颜色
-		// 超过边界，对象状态为死亡
-		if(x<0 || y<0 || x>800 || y>800) {
-			survive = false;
+		g.setColor(g.getColor()); // 设置为原来的颜色*/
+
+		switch (dir) {
+			case UP:
+				g.drawImage(ResourceMgr.bulletU, x, y, null);
+				break;
+			case DOWN:
+				g.drawImage(ResourceMgr.bulletD, x, y, null);
+				break;
+			case LEFT:
+				g.drawImage(ResourceMgr.bulletL, x, y, null);
+				break;
+			case RIGHT:
+				g.drawImage(ResourceMgr.bulletR, x, y, null);
+				break;
+			default: break;
 		}
+
+		move();
+
 	}
 
 	private void move(){
@@ -74,6 +90,11 @@ public class Bullet {
 				x += step;
 				break;
 			default: break;
+		}
+
+		// 超过边界，对象状态为死亡
+		if(x<0 || y<0 || x>800 || y>800) {
+			survive = false;
 		}
 	}
 
