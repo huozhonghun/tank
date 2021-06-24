@@ -1,6 +1,6 @@
 package com.huozhonghun.tank.enity;
 
-import com.huozhonghun.tank.ResourceMgr;
+import com.huozhonghun.tank.utils.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import java.awt.*;
 
@@ -13,10 +13,10 @@ import java.awt.*;
 public class Tank {
 
 	// 长度
-	private static int WIDTH = 50;
+	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
 
 	// 宽度
-	private static int HEIGHT = 50;
+	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
 	// 每次移动步数
 	private static final int step = 10;
@@ -100,6 +100,6 @@ public class Tank {
 	// 开火
 	public void fire(){
 		// 20 = 50/2 - 10/2
-		tankFrame.bulletList.add(new Bullet(x + 20, y + 20, dir, this.tankFrame));
+		tankFrame.bulletList.add(new Bullet(x + Tank.WIDTH/2 - Bullet.WIDTH/2, y + Tank.HEIGHT/2 - Bullet.HEIGHT/2, dir, this.tankFrame));
 	}
 }

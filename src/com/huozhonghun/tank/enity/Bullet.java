@@ -1,6 +1,6 @@
 package com.huozhonghun.tank.enity;
 
-import com.huozhonghun.tank.ResourceMgr;
+import com.huozhonghun.tank.utils.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import java.awt.*;
 
@@ -13,10 +13,10 @@ import java.awt.*;
 public class Bullet {
 
 	// 长度
-	private static int WIDTH = 10;
+	public static int WIDTH = ResourceMgr.bulletU.getWidth();
 
 	// 宽度
-	private static int HEIGHT = 10;
+	public static int HEIGHT = ResourceMgr.bulletU.getHeight();
 
 	// 每次移动步数
 	private static final int step = 5;
