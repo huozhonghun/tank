@@ -51,7 +51,14 @@ public class Bullet {
 		// 画出物体的位置和大小
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
-//		g.setColor(g.getColor());
+		g.setColor(g.getColor()); // 设置为原来的颜色
+		// 超过边界，对象状态为死亡
+		if(x<0 || y<0 || x>800 || y>800) {
+			survive = false;
+		}
+	}
+
+	private void move(){
 		// 判断方向来移动坦克
 		switch (dir) {
 			case UP:
@@ -68,8 +75,6 @@ public class Bullet {
 				break;
 			default: break;
 		}
-//		if(x<0 || y<0 || x>800 || y>800) tankFrame.bullet=null;
-		if(x<0 || y<0 || x>800 || y>800) survive = false;
 	}
 
 }

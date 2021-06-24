@@ -53,8 +53,10 @@ public class Tank {
 		// 画出物体的位置和大小
 		g.setColor(Color.GREEN);
 		g.fillRect(x,y,WIDTH,HEIGHT);
-//		g.setColor(g.getColor());
+		g.setColor(g.getColor()); // 设置为原来的颜色
+	}
 
+	private void move(){
 		if(moving){
 			// 判断方向来移动坦克
 			switch (dir) {
