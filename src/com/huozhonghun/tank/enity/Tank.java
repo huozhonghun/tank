@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import java.awt.*;
 
@@ -50,10 +51,28 @@ public class Tank {
 	}
 
 	public void paint(Graphics g){
-		// 画出物体的位置和大小
+
+		switch (dir) {
+			case UP:
+				g.drawImage(ResourceMgr.goodTankU, x, y, null);
+				break;
+			case DOWN:
+				g.drawImage(ResourceMgr.goodTankD, x, y, null);
+				break;
+			case LEFT:
+				g.drawImage(ResourceMgr.goodTankL, x, y, null);
+				break;
+			case RIGHT:
+				g.drawImage(ResourceMgr.goodTankR, x, y, null);
+				break;
+			default: break;
+		}
+
+		/*// 画出物体的位置和大小
 		g.setColor(Color.GREEN);
 		g.fillRect(x,y,WIDTH,HEIGHT);
-		g.setColor(g.getColor()); // 设置为原来的颜色
+		g.setColor(g.getColor()); // 设置为原来的颜色*/
+
 	}
 
 	private void move(){
