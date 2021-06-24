@@ -55,6 +55,14 @@ public class TankFrame extends Frame {
 	// 画出物体
 	@Override
 	public void paint(Graphics g) {
+		Color color = g.getColor();
+		g.setColor(Color.red);
+		// 展示物体数量
+		g.drawString("敌军坦克数量：" + tankList.size(), 20, 60);
+		g.drawString("子弹数量：" + bulletList.size(), 20, 80);
+		// 设为原来的颜色，保证不影响其他对象
+		g.setColor(color);
+
 		player.paint(g);
 		// 遍历存活子弹
 		for (int i = 0; i < bulletList.size(); i++) {
