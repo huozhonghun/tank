@@ -73,6 +73,7 @@ public class Tank {
 		g.fillRect(x,y,WIDTH,HEIGHT);
 		g.setColor(g.getColor()); // 设置为原来的颜色*/
 
+		move();
 	}
 
 	private void move(){
