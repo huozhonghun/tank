@@ -1,8 +1,10 @@
 package com.huozhonghun.tank.enity;
 
-import com.huozhonghun.tank.utils.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
+import com.huozhonghun.tank.enums.Group;
+import com.huozhonghun.tank.utils.ResourceMgr;
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克对象
@@ -39,9 +41,15 @@ public class Tank {
 	// 对象存活状态
 	private boolean survive = true;
 
-	public Tank(int x, int y, TankFrame tankFrame) {
+	// 坦克分类
+	private Group group;
+
+	private Random random = new Random();
+
+	public Tank(int x, int y, Group group, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
+		this.group = group;
 		this.tankFrame = tankFrame; // 为了刷新子弹位置
 	}
 
@@ -92,6 +100,15 @@ public class Tank {
 			default: break;
 		}
 
+		if(this.group.equals(Group.BAD) && random.nextInt(10)>8){
+			this.fire();
+		}
+
+		if(this.group.equals(Group.BAD) && random.nextInt(10)>8){
+			moving = true;
+			this.dir = DirectionEnum.values()[random.nextInt(4)];
+		}
+
 		/*// 画出物体的位置和大小
 		g.setColor(Color.GREEN);
 		g.fillRect(x,y,WIDTH,HEIGHT);
@@ -123,11 +140,12 @@ public class Tank {
 
 	// 开火
 	public void fire(){
-		tankFrame.bulletList.add(new Bullet(x + Tank.WIDTH/2 - Bullet.WIDTH/2, y + Tank.HEIGHT/2 - Bullet.HEIGHT/2, dir, this.tankFrame));
+		tankFrame.bulletList.add(new Bullet(x + Tank.WIDTH/2 - Bullet.WIDTH/2, y + Tank.HEIGHT/2 - Bullet.HEIGHT/2, group, dir, this.tankFrame));
 	}
 
 	// 坦克子弹对象碰撞
 	public void collision(Bullet bullet){
+		if(this.group ==  bullet.getGroup()) return;
 		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 		Rectangle rect2 = new Rectangle(bullet.getX(), bullet.getY(), Bullet.WIDTH, Bullet.HEIGHT);
 		if(rect1.intersects(rect2)) {

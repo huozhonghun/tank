@@ -1,6 +1,7 @@
 package com.huozhonghun.tank.enity;
 
 import com.huozhonghun.tank.enums.DirectionEnum;
+import com.huozhonghun.tank.enums.Group;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -22,7 +23,7 @@ public class TankFrame extends Frame {
 	private static final int FRAME_HEIGHT = 800;
 
 
-	Tank player = new Tank(150, 150, this);
+	Tank player = new Tank(150, 150, Group.GOOD, this);
 
 	List<Bullet> bulletList = new ArrayList<Bullet>();
 

@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.enums.Group;
 import com.huozhonghun.tank.utils.ResourceMgr;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import java.awt.*;
@@ -36,9 +37,13 @@ public class Bullet {
 	// 坦克框架
 	private TankFrame tankFrame;
 
-	public Bullet(int x, int y, DirectionEnum dir, TankFrame tankFrame) {
+	// 坦克分类
+	private Group group;
+
+	public Bullet(int x, int y, Group group, DirectionEnum dir, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
+		this.group = group;
 		this.dir = dir;
 		this.tankFrame = tankFrame;
 	}
@@ -57,6 +62,14 @@ public class Bullet {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public void paint(Graphics g){
