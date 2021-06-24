@@ -18,18 +18,19 @@ import java.util.List;
 public class TankFrame extends Frame {
 
 	private static final int FRAME_WIDTH = 800;
+
 	private static final int FRAME_HEIGHT = 800;
 
 
-	Tank tank1 = new Tank(150, 150, this);
+	Tank player = new Tank(150, 150, this);
 
 	List<Bullet> bulletList = new ArrayList<Bullet>();
 
-	Bullet bullet = new Bullet(170, 170, DirectionEnum.DOWN, this);
+	public List<Tank> tankList = new ArrayList<Tank>();
 
 	public TankFrame() {
 		// 窗口大小
-		setSize(800, 800);
+		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		// 窗口大小是否可调整
 		setResizable(true);
 		// 窗口标题
@@ -54,10 +55,15 @@ public class TankFrame extends Frame {
 	// 画出物体
 	@Override
 	public void paint(Graphics g) {
-		tank1.paint(g);
+		player.paint(g);
 		// 遍历存活子弹
 		for (int i = 0; i < bulletList.size(); i++) {
 			bulletList.get(i).paint(g);
+		}
+
+		// 创建敌军坦克
+		for (int i = 0; i < tankList.size(); i++) {
+			tankList.get(i).paint(g);
 		}
 	}
 
@@ -123,7 +129,7 @@ public class TankFrame extends Frame {
 					DM = false;
 					break;
 				case KeyEvent.VK_CONTROL:
-					tank1.fire();
+					player.fire();
 				default:
 					break;
 			}
@@ -132,13 +138,13 @@ public class TankFrame extends Frame {
 
 		void setTankDir(){
 			if(!UM && !DM && !LM && !RM){
-				tank1.setMoving(false);
+				player.setMoving(false);
 			}else{
-				tank1.setMoving(true);
-				if(UM) tank1.setDir(DirectionEnum.UP);
-				if(DM) tank1.setDir(DirectionEnum.DOWN);
-				if(LM) tank1.setDir(DirectionEnum.LEFT);
-				if(RM) tank1.setDir(DirectionEnum.RIGHT);
+				player.setMoving(true);
+				if(UM) player.setDir(DirectionEnum.UP);
+				if(DM) player.setDir(DirectionEnum.DOWN);
+				if(LM) player.setDir(DirectionEnum.LEFT);
+				if(RM) player.setDir(DirectionEnum.RIGHT);
 			}
 		}
 
