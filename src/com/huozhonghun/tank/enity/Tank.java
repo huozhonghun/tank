@@ -36,10 +36,29 @@ public class Tank {
 	// 允许移动
 	private boolean moving = false;
 
+	// 对象存活状态
+	private boolean survive = true;
+
 	public Tank(int x, int y, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
 		this.tankFrame = tankFrame; // 为了刷新子弹位置
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public void setDir(DirectionEnum dir) {
@@ -51,6 +70,11 @@ public class Tank {
 	}
 
 	public void paint(Graphics g){
+
+		if (!survive){
+			// 清理多余对象
+			tankFrame.tankList.remove(this);
+		}
 
 		switch (dir) {
 			case UP:
@@ -99,7 +123,21 @@ public class Tank {
 
 	// 开火
 	public void fire(){
-		// 20 = 50/2 - 10/2
 		tankFrame.bulletList.add(new Bullet(x + Tank.WIDTH/2 - Bullet.WIDTH/2, y + Tank.HEIGHT/2 - Bullet.HEIGHT/2, dir, this.tankFrame));
 	}
+
+	// 坦克子弹对象碰撞
+	public void collision(Bullet bullet){
+		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+		Rectangle rect2 = new Rectangle(bullet.getX(), bullet.getY(), Bullet.WIDTH, Bullet.HEIGHT);
+		if(rect1.intersects(rect2)) {
+			this.die();
+			bullet.die();
+		}
+	}
+
+	public void die(){
+		this.survive = false;
+	}
+
 }

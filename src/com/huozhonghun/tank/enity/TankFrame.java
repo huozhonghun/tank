@@ -73,6 +73,15 @@ public class TankFrame extends Frame {
 		for (int i = 0; i < tankList.size(); i++) {
 			tankList.get(i).paint(g);
 		}
+
+		// 坦克碰撞，子弹碰撞
+		for (int i = 0; i < tankList.size(); i++) {
+			for (int j = 0; j < bulletList.size(); j++) {
+				tankList.get(i).collision(bulletList.get(j));
+			}
+		}
+
+
 	}
 
 	Image offScreenImage = null;

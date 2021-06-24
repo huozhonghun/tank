@@ -43,6 +43,22 @@ public class Bullet {
 		this.tankFrame = tankFrame;
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	public void paint(Graphics g){
 		if(!survive){
 			// 清理多余对象，防止内存泄漏
@@ -96,6 +112,10 @@ public class Bullet {
 		if(x<0 || y<0 || x>800 || y>800) {
 			survive = false;
 		}
+	}
+
+	public void die(){
+		this.survive = false;
 	}
 
 }
