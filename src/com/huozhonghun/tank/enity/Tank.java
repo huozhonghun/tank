@@ -21,7 +21,7 @@ public class Tank {
 	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
 	// 每次移动步数
-	private static final int step = 10;
+	private static final int step = 2;
 
 	// 横坐标
 	private int x;
@@ -151,6 +151,7 @@ public class Tank {
 		if(rect1.intersects(rect2)) {
 			this.die();
 			bullet.die();
+			tankFrame.explosionList.add(new Explosion(x, y, tankFrame));
 		}
 	}
 

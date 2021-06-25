@@ -37,6 +37,6 @@ public class Explosion {
 
 	public void paint(Graphics g){
 		g.drawImage(ResourceMgr.explodes[status++], x, y, null);
-		if(status>=ResourceMgr.explodes.length) status=0;
+		if(status>=ResourceMgr.explodes.length) tankFrame.explosionList.remove(this);
 	}
 }

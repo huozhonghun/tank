@@ -27,9 +27,9 @@ public class TankFrame extends Frame {
 
 	List<Bullet> bulletList = new ArrayList<Bullet>();
 
-	public List<Tank> tankList = new ArrayList<Tank>();
+	List<Explosion> explosionList = new ArrayList<Explosion>();
 
-	Explosion explosion = new Explosion(200, 200, this);
+	public List<Tank> tankList = new ArrayList<Tank>();
 
 	public TankFrame() {
 		// 窗口大小
@@ -72,6 +72,11 @@ public class TankFrame extends Frame {
 			bulletList.get(i).paint(g);
 		}
 
+		// 展示爆炸
+		for (int i = 0; i < explosionList.size(); i++) {
+			explosionList.get(i).paint(g);
+		}
+
 		// 创建敌军坦克
 		for (int i = 0; i < tankList.size(); i++) {
 			tankList.get(i).paint(g);
@@ -83,8 +88,6 @@ public class TankFrame extends Frame {
 				tankList.get(i).collision(bulletList.get(j));
 			}
 		}
-
-		explosion.paint(g);
 
 	}
 
