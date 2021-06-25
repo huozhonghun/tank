@@ -86,27 +86,34 @@ public class Tank {
 
 		switch (dir) {
 			case UP:
-				g.drawImage(ResourceMgr.goodTankU, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
 				break;
 			case DOWN:
-				g.drawImage(ResourceMgr.goodTankD, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.goodTankD, x, y, null);
 				break;
 			case LEFT:
-				g.drawImage(ResourceMgr.goodTankL, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.goodTankL, x, y, null);
 				break;
 			case RIGHT:
-				g.drawImage(ResourceMgr.goodTankR, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.goodTankR, x, y, null);
 				break;
 			default: break;
 		}
 
-		if(this.group.equals(Group.BAD) && random.nextInt(20)>18){
-			this.fire();
-		}
+		if(this.group.equals(Group.BAD)){
 
-		if(this.group.equals(Group.BAD) && random.nextInt(20)>18){
-			moving = true;
-			this.dir = DirectionEnum.values()[random.nextInt(4)];
+			WIDTH = ResourceMgr.badTankU.getWidth();
+			HEIGHT = ResourceMgr.badTankU.getHeight();
+
+			if(random.nextInt(20)>18){
+				this.fire();
+			}
+
+			if(random.nextInt(20)>18){
+				moving = true;
+				this.dir = DirectionEnum.values()[random.nextInt(4)];
+			}
+
 		}
 
 		/*// 画出物体的位置和大小
