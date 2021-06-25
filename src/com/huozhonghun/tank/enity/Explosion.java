@@ -12,10 +12,10 @@ import java.awt.*;
 public class Explosion {
 
 	// 长度
-	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
+	public static int WIDTH = ResourceMgr.explodes[0].getWidth();
 
 	// 宽度
-	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
+	public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
 
 	// 横坐标
 	private int x;

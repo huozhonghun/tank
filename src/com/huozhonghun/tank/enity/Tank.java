@@ -140,7 +140,7 @@ public class Tank {
 
 	// 开火
 	public void fire(){
-		tankFrame.bulletList.add(new Bullet(x + Tank.WIDTH/2 - Bullet.WIDTH/2, y + Tank.HEIGHT/2 - Bullet.HEIGHT/2, group, dir, this.tankFrame));
+		tankFrame.bulletList.add(new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y + HEIGHT/2 - Bullet.HEIGHT/2, group, dir, this.tankFrame));
 	}
 
 	// 坦克子弹对象碰撞
@@ -151,7 +151,7 @@ public class Tank {
 		if(rect1.intersects(rect2)) {
 			this.die();
 			bullet.die();
-			tankFrame.explosionList.add(new Explosion(x, y, tankFrame));
+			tankFrame.explosionList.add(new Explosion(x + WIDTH/2 - Explosion.WIDTH/2, y + HEIGHT/2 - Explosion.HEIGHT/2, tankFrame));
 		}
 	}
 
