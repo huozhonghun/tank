@@ -29,6 +29,8 @@ public class TankFrame extends Frame {
 
 	public List<Tank> tankList = new ArrayList<Tank>();
 
+	Explosion explosion = new Explosion(200, 200, this);
+
 	public TankFrame() {
 		// 窗口大小
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -82,6 +84,7 @@ public class TankFrame extends Frame {
 			}
 		}
 
+		explosion.paint(g);
 
 	}
 

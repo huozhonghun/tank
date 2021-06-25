@@ -100,11 +100,11 @@ public class Tank {
 			default: break;
 		}
 
-		if(this.group.equals(Group.BAD) && random.nextInt(10)>8){
+		if(this.group.equals(Group.BAD) && random.nextInt(20)>18){
 			this.fire();
 		}
 
-		if(this.group.equals(Group.BAD) && random.nextInt(10)>8){
+		if(this.group.equals(Group.BAD) && random.nextInt(20)>18){
 			moving = true;
 			this.dir = DirectionEnum.values()[random.nextInt(4)];
 		}
