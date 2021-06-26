@@ -89,13 +89,13 @@ public class Tank {
 				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
 				break;
 			case DOWN:
-				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.goodTankD, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
 				break;
 			case LEFT:
-				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.goodTankL, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
 				break;
 			case RIGHT:
-				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.goodTankR, x, y, null);
+				g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
 				break;
 			default: break;
 		}
@@ -105,11 +105,11 @@ public class Tank {
 			WIDTH = ResourceMgr.badTankU.getWidth();
 			HEIGHT = ResourceMgr.badTankU.getHeight();
 
-			if(random.nextInt(20)>18){
+			if(random.nextInt(100)>90){
 				this.fire();
 			}
 
-			if(random.nextInt(20)>18){
+			if(random.nextInt(100)>80){
 				moving = true;
 				this.dir = DirectionEnum.values()[random.nextInt(4)];
 			}
@@ -143,6 +143,17 @@ public class Tank {
 				default: break;
 			}
 		}
+
+		// 限制边界
+		boundaryLimit();
+	}
+
+	private void boundaryLimit() {
+		// 坐标从左上角开始算
+		if(x < 2) x = 2;
+		if(x > tankFrame.FRAME_WIDTH - this.WIDTH - 2) x = tankFrame.FRAME_WIDTH - this.WIDTH - 2;
+		if(y < 65) y = 65;
+		if(y > tankFrame.FRAME_HEIGHT - this.HEIGHT - 2) y = tankFrame.FRAME_HEIGHT - this.HEIGHT - 2;
 	}
 
 	// 开火

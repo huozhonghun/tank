@@ -18,9 +18,9 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-	private static final int FRAME_WIDTH = 800;
+	public static final int FRAME_WIDTH = 800;
 
-	private static final int FRAME_HEIGHT = 800;
+	public static final int FRAME_HEIGHT = 800;
 
 
 	Tank player = new Tank(150, 150, Group.GOOD, this);
@@ -61,8 +61,8 @@ public class TankFrame extends Frame {
 		Color color = g.getColor();
 		g.setColor(Color.red);
 		// 展示物体数量
-		g.drawString("敌军坦克数量：" + tankList.size(), 20, 60);
-		g.drawString("子弹数量：" + bulletList.size(), 20, 80);
+		g.drawString("敌军坦克数量：" + tankList.size(), 10, 45);
+		g.drawString("子弹数量：" + bulletList.size(), 10, 60);
 		// 设为原来的颜色，保证不影响其他对象
 		g.setColor(color);
 
