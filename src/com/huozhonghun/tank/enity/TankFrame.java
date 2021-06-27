@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.common.config.TankProperty;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import com.huozhonghun.tank.enums.Group;
 import com.huozhonghun.tank.utils.Audio;
@@ -10,6 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 坦克框架对象
@@ -19,9 +21,9 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-	public static final int FRAME_WIDTH = 800;
+	public static final int FRAME_WIDTH = Objects.isNull(TankProperty.get("FRAME_WIDTH")) ? 0 :  Integer.valueOf(TankProperty.get("FRAME_WIDTH").toString());
 
-	public static final int FRAME_HEIGHT = 800;
+	public static final int FRAME_HEIGHT = Objects.isNull(TankProperty.get("FRAME_HEIGHT")) ? 0 : Integer.valueOf(TankProperty.get("FRAME_HEIGHT").toString());
 
 
 	Tank player = new Tank(150, 150, Group.GOOD, this);
