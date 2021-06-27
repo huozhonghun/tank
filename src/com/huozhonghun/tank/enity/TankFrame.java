@@ -28,9 +28,9 @@ public class TankFrame extends Frame {
 
 	Tank player = new Tank(150, 150, Group.GOOD, this);
 
-	List<Bullet> bulletList = new ArrayList<Bullet>();
+	public List<Bullet> bulletList = new ArrayList<Bullet>();
 
-	List<Explosion> explosionList = new ArrayList<Explosion>();
+	public List<Explosion> explosionList = new ArrayList<Explosion>();
 
 	public List<Tank> tankList = new ArrayList<Tank>();
 
