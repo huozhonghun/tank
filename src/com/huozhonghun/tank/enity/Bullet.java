@@ -40,12 +40,16 @@ public class Bullet {
 	// 坦克分类
 	private Group group;
 
+	public Rectangle rect;
+
 	public Bullet(int x, int y, Group group, DirectionEnum dir, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
 		this.group = group;
 		this.dir = dir;
 		this.tankFrame = tankFrame;
+
+		rect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 	}
 
 	public int getX() {
@@ -125,6 +129,9 @@ public class Bullet {
 		if(x<0 || y<0 || x>800 || y>800) {
 			survive = false;
 		}
+
+		rect.x = this.x;
+		rect.y = this.y;
 	}
 
 	public void die(){

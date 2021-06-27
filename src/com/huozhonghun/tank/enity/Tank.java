@@ -47,11 +47,15 @@ public class Tank {
 
 	private Random random = new Random();
 
+	public Rectangle rect;
+
 	public Tank(int x, int y, Group group, TankFrame tankFrame) {
 		this.x = x;
 		this.y = y;
 		this.group = group;
 		this.tankFrame = tankFrame; // 为了刷新子弹位置
+
+		rect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 	}
 
 	public int getX() {
@@ -147,6 +151,9 @@ public class Tank {
 
 		// 限制边界
 		boundaryLimit();
+
+		rect.x = this.x;
+		rect.y = this.y;
 	}
 
 	private void boundaryLimit() {
@@ -170,9 +177,7 @@ public class Tank {
 	// 坦克子弹对象碰撞
 	public void collision(Bullet bullet){
 		if(this.group ==  bullet.getGroup()) return;
-		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-		Rectangle rect2 = new Rectangle(bullet.getX(), bullet.getY(), Bullet.WIDTH, Bullet.HEIGHT);
-		if(rect1.intersects(rect2)) {
+		if(this.rect.intersects(bullet.rect)) {
 			this.die();
 			bullet.die();
 			tankFrame.explosionList.add(new Explosion(x + WIDTH/2 - Explosion.WIDTH/2, y + HEIGHT/2 - Explosion.HEIGHT/2, tankFrame));
