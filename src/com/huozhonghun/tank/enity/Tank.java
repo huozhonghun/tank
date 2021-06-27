@@ -2,6 +2,7 @@ package com.huozhonghun.tank.enity;
 
 import com.huozhonghun.tank.enums.DirectionEnum;
 import com.huozhonghun.tank.enums.Group;
+import com.huozhonghun.tank.utils.Audio;
 import com.huozhonghun.tank.utils.ResourceMgr;
 import java.awt.*;
 import java.util.Random;
@@ -109,7 +110,7 @@ public class Tank {
 				this.fire();
 			}
 
-			if(random.nextInt(100)>80){
+			if(random.nextInt(100)>90){
 				moving = true;
 				this.dir = DirectionEnum.values()[random.nextInt(4)];
 			}
@@ -159,6 +160,11 @@ public class Tank {
 	// 开火
 	public void fire(){
 		tankFrame.bulletList.add(new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y + HEIGHT/2 - Bullet.HEIGHT/2, group, dir, this.tankFrame));
+
+		if(this.group == Group.GOOD){
+			// 开火发出声音
+			new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+		}
 	}
 
 	// 坦克子弹对象碰撞

@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.utils.Audio;
 import com.huozhonghun.tank.utils.ResourceMgr;
 import java.awt.*;
 
@@ -33,6 +34,8 @@ public class Explosion {
 		this.x = x;
 		this.y = y;
 		this.tankFrame = tankFrame;
+		// 爆炸发出声音
+		new Thread(()->new Audio("audio/explode.wav").play()).start();
 	}
 
 	public void paint(Graphics g){

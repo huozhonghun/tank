@@ -20,7 +20,7 @@ public class Bullet {
 	public static int HEIGHT = ResourceMgr.bulletU.getHeight();
 
 	// 每次移动步数
-	private static final int step = 5;
+	private static final int step = 10;
 
 	// 横坐标
 	private int x;

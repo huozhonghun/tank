@@ -2,6 +2,7 @@ package com.huozhonghun.tank.enity;
 
 import com.huozhonghun.tank.enums.DirectionEnum;
 import com.huozhonghun.tank.enums.Group;
+import com.huozhonghun.tank.utils.Audio;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -53,6 +54,9 @@ public class TankFrame extends Frame {
 			}
 
 		});
+
+		// 发出声音
+		new Thread(()->new Audio("audio/war1.wav").play()).start();
 	}
 
 	// 画出物体
@@ -61,8 +65,8 @@ public class TankFrame extends Frame {
 		Color color = g.getColor();
 		g.setColor(Color.red);
 		// 展示物体数量
-		g.drawString("敌军坦克数量：" + tankList.size(), 10, 45);
-		g.drawString("子弹数量：" + bulletList.size(), 10, 60);
+		g.drawString("敌军坦克数量：" + tankList.size(), 10, 50);
+		g.drawString("子弹数量：" + bulletList.size(), 10, 70);
 		// 设为原来的颜色，保证不影响其他对象
 		g.setColor(color);
 
@@ -133,7 +137,9 @@ public class TankFrame extends Frame {
 				default:
 					break;
 			}
+
 			setTankDir();
+
 		}
 
 		@Override
@@ -169,6 +175,8 @@ public class TankFrame extends Frame {
 				if(DM) player.setDir(DirectionEnum.DOWN);
 				if(LM) player.setDir(DirectionEnum.LEFT);
 				if(RM) player.setDir(DirectionEnum.RIGHT);
+				// 按下键盘发出声音
+				new Thread(()->new Audio("audio/tank_move.wav").play()).start();
 			}
 		}
 
