@@ -161,7 +161,7 @@ public class TankFrame extends Frame {
 					DM = false;
 					break;
 				case KeyEvent.VK_CONTROL:
-					player.fire();
+					player.handleFir();
 				default:
 					break;
 			}

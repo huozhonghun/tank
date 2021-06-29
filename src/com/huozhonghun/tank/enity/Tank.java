@@ -1,5 +1,8 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.common.observer.TankEvent;
+import com.huozhonghun.tank.common.observer.TankHandle;
+import com.huozhonghun.tank.common.observer.TankSource;
 import com.huozhonghun.tank.enums.DirectionEnum;
 import com.huozhonghun.tank.enums.Group;
 import com.huozhonghun.tank.utils.Audio;
@@ -188,4 +191,9 @@ public class Tank {
 		this.survive = false;
 	}
 
+	public void handleFir() {
+		TankEvent tankEvent = new TankEvent(this);
+		TankSource tankSource = new TankHandle();
+		tankSource.Fire(tankEvent);
+	}
 }
