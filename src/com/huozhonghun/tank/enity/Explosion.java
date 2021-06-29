@@ -24,22 +24,18 @@ public class Explosion {
 	// 纵坐标
 	private int y;
 
-	// 坦克框架
-	private TankFrame tankFrame;
-
 	// 爆炸状态
 	private int status = 0;
 
-	public Explosion(int x, int y, TankFrame tankFrame) {
+	public Explosion(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.tankFrame = tankFrame;
 		// 爆炸发出声音
 		new Thread(()->new Audio("audio/explode.wav").play()).start();
 	}
 
 	public void paint(Graphics g){
 		g.drawImage(ResourceMgr.explodes[status++], x, y, null);
-		if(status>=ResourceMgr.explodes.length) tankFrame.explosionList.remove(this);
+		if(status>=ResourceMgr.explodes.length) GameModel.getINSTANCE().explosionList.remove(this);
 	}
 }

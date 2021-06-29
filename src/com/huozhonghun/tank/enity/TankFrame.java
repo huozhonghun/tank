@@ -2,15 +2,12 @@ package com.huozhonghun.tank.enity;
 
 import com.huozhonghun.tank.common.config.TankProperty;
 import com.huozhonghun.tank.enums.DirectionEnum;
-import com.huozhonghun.tank.enums.Group;
 import com.huozhonghun.tank.utils.Audio;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,14 +22,7 @@ public class TankFrame extends Frame {
 
 	public static final int FRAME_HEIGHT = Objects.isNull(TankProperty.get("FRAME_HEIGHT")) ? 0 : Integer.valueOf(TankProperty.get("FRAME_HEIGHT").toString());
 
-
-	Tank player = new Tank(150, 150, Group.GOOD, this);
-
-	public List<Bullet> bulletList = new ArrayList<Bullet>();
-
-	public List<Explosion> explosionList = new ArrayList<Explosion>();
-
-	public List<Tank> tankList = new ArrayList<Tank>();
+	private GameModel gm = GameModel.getINSTANCE();
 
 	public TankFrame() {
 		// 窗口大小
@@ -64,37 +54,7 @@ public class TankFrame extends Frame {
 	// 画出物体
 	@Override
 	public void paint(Graphics g) {
-		Color color = g.getColor();
-		g.setColor(Color.red);
-		// 展示物体数量
-		g.drawString("敌军坦克数量：" + tankList.size(), 10, 50);
-		g.drawString("子弹数量：" + bulletList.size(), 10, 70);
-		// 设为原来的颜色，保证不影响其他对象
-		g.setColor(color);
-
-		player.paint(g);
-		// 遍历存活子弹
-		for (int i = 0; i < bulletList.size(); i++) {
-			bulletList.get(i).paint(g);
-		}
-
-		// 展示爆炸
-		for (int i = 0; i < explosionList.size(); i++) {
-			explosionList.get(i).paint(g);
-		}
-
-		// 创建敌军坦克
-		for (int i = 0; i < tankList.size(); i++) {
-			tankList.get(i).paint(g);
-		}
-
-		// 坦克碰撞，子弹碰撞
-		for (int i = 0; i < tankList.size(); i++) {
-			for (int j = 0; j < bulletList.size(); j++) {
-				tankList.get(i).collision(bulletList.get(j));
-			}
-		}
-
+		gm.paint(g);
 	}
 
 	Image offScreenImage = null;
@@ -161,7 +121,7 @@ public class TankFrame extends Frame {
 					DM = false;
 					break;
 				case KeyEvent.VK_CONTROL:
-					player.fire();
+					gm.getPlayer().fire();
 				default:
 					break;
 			}
@@ -169,6 +129,7 @@ public class TankFrame extends Frame {
 		}
 
 		void setTankDir(){
+			Tank player = gm.getPlayer();
 			if(!UM && !DM && !LM && !RM){
 				player.setMoving(false);
 			}else{

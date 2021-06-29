@@ -34,20 +34,16 @@ public class Bullet {
 	// 对象存活状态
 	private boolean survive = true;
 
-	// 坦克框架
-	private TankFrame tankFrame;
-
 	// 坦克分类
 	private Group group;
 
 	public Rectangle rect;
 
-	public Bullet(int x, int y, Group group, DirectionEnum dir, TankFrame tankFrame) {
+	public Bullet(int x, int y, Group group, DirectionEnum dir) {
 		this.x = x;
 		this.y = y;
 		this.group = group;
 		this.dir = dir;
-		this.tankFrame = tankFrame;
 
 		rect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 	}
@@ -79,7 +75,7 @@ public class Bullet {
 	public void paint(Graphics g){
 		if(!survive){
 			// 清理多余对象，防止内存泄漏
-			tankFrame.bulletList.remove(this);
+			GameModel.getINSTANCE().bulletList.remove(this);
 		}
 
 /*		// 画出物体的位置和大小

@@ -32,9 +32,6 @@ public class Tank {
 	// 纵坐标
 	private int y;
 
-	// 坦克框架
-	public TankFrame tankFrame;
-
 	// 默认方向向下
 	private DirectionEnum dir = DirectionEnum.DOWN;
 
@@ -54,11 +51,10 @@ public class Tank {
 	// 开火策略
 	FireStrategy fs;
 
-	public Tank(int x, int y, Group group, TankFrame tankFrame) {
+	public Tank(int x, int y, Group group) {
 		this.x = x;
 		this.y = y;
 		this.group = group;
-		this.tankFrame = tankFrame; // 为了刷新子弹位置
 
 		rect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 
@@ -110,7 +106,7 @@ public class Tank {
 
 		if (!survive){
 			// 清理多余对象
-			tankFrame.tankList.remove(this);
+			GameModel.getINSTANCE().tankList.remove(this);
 		}
 
 		switch (dir) {
@@ -183,9 +179,9 @@ public class Tank {
 	private void boundaryLimit() {
 		// 坐标从左上角开始算
 		if(x < 2) x = 2;
-		if(x > tankFrame.FRAME_WIDTH - this.WIDTH - 2) x = tankFrame.FRAME_WIDTH - this.WIDTH - 2;
+		if(x > TankFrame.FRAME_WIDTH - this.WIDTH - 2) x = TankFrame.FRAME_WIDTH - this.WIDTH - 2;
 		if(y < 65) y = 65;
-		if(y > tankFrame.FRAME_HEIGHT - this.HEIGHT - 2) y = tankFrame.FRAME_HEIGHT - this.HEIGHT - 2;
+		if(y > TankFrame.FRAME_HEIGHT - this.HEIGHT - 2) y = TankFrame.FRAME_HEIGHT - this.HEIGHT - 2;
 	}
 
 	// 开火
@@ -205,7 +201,7 @@ public class Tank {
 		if(this.rect.intersects(bullet.rect)) {
 			this.die();
 			bullet.die();
-			tankFrame.explosionList.add(new Explosion(x + WIDTH/2 - Explosion.WIDTH/2, y + HEIGHT/2 - Explosion.HEIGHT/2, tankFrame));
+			GameModel.getINSTANCE().explosionList.add(new Explosion(x + WIDTH/2 - Explosion.WIDTH/2, y + HEIGHT/2 - Explosion.HEIGHT/2));
 		}
 	}
 
