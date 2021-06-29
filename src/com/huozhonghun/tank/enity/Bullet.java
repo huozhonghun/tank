@@ -11,7 +11,7 @@ import java.awt.*;
  * @author weichenglin
  * @create $2021-06-21-下午 04:20:16
  */
-public class Bullet {
+public class Bullet extends GameObject {
 
 	// 长度
 	public static int WIDTH = ResourceMgr.bulletU.getWidth();
@@ -75,13 +75,8 @@ public class Bullet {
 	public void paint(Graphics g){
 		if(!survive){
 			// 清理多余对象，防止内存泄漏
-			GameModel.getINSTANCE().bulletList.remove(this);
+			GameModel.getINSTANCE().gameObjects.remove(this);
 		}
-
-/*		// 画出物体的位置和大小
-		g.setColor(Color.RED);
-		g.fillOval(x, y, WIDTH, HEIGHT);
-		g.setColor(g.getColor()); // 设置为原来的颜色*/
 
 		switch (dir) {
 			case UP:

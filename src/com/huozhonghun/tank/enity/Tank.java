@@ -15,7 +15,7 @@ import java.util.Random;
  * @author weichenglin
  * @create $2021-06-21-下午 03:46:53
  */
-public class Tank {
+public class Tank extends GameObject{
 
 	// 长度
 	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -50,6 +50,12 @@ public class Tank {
 
 	// 开火策略
 	FireStrategy fs;
+
+	// 上次横坐标
+	private int oldX;
+
+	// 上次纵坐标
+	private int oldY;
 
 	public Tank(int x, int y, Group group) {
 		this.x = x;
@@ -106,7 +112,7 @@ public class Tank {
 
 		if (!survive){
 			// 清理多余对象
-			GameModel.getINSTANCE().tankList.remove(this);
+			GameModel.getINSTANCE().gameObjects.remove(this);
 		}
 
 		switch (dir) {
@@ -141,16 +147,14 @@ public class Tank {
 
 		}
 
-		/*// 画出物体的位置和大小
-		g.setColor(Color.GREEN);
-		g.fillRect(x,y,WIDTH,HEIGHT);
-		g.setColor(g.getColor()); // 设置为原来的颜色*/
-
 		move();
 	}
 
 	private void move(){
 		if(moving){
+			// 记录旧位置
+			oldX = x;
+			oldY = y;
 			// 判断方向来移动坦克
 			switch (dir) {
 				case UP:
@@ -186,27 +190,16 @@ public class Tank {
 
 	// 开火
 	public void fire(){
-//		tankFrame.bulletList.add(new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y + HEIGHT/2 - Bullet.HEIGHT/2, group, dir, this.tankFrame));
-//
-//		if(this.group == Group.GOOD){
-//			// 开火发出声音
-//			new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
-//		}
 		fs.fire(this);
-	}
-
-	// 坦克子弹对象碰撞
-	public void collision(Bullet bullet){
-		if(this.group ==  bullet.getGroup()) return;
-		if(this.rect.intersects(bullet.rect)) {
-			this.die();
-			bullet.die();
-			GameModel.getINSTANCE().explosionList.add(new Explosion(x + WIDTH/2 - Explosion.WIDTH/2, y + HEIGHT/2 - Explosion.HEIGHT/2));
-		}
 	}
 
 	public void die(){
 		this.survive = false;
+	}
+
+	public void goBack(){
+		this.x = this.oldX;
+		this.y = this.oldY;
 	}
 
 }

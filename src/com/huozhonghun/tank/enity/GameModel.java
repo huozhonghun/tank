@@ -1,5 +1,6 @@
 package com.huozhonghun.tank.enity;
 
+import com.huozhonghun.tank.common.chain.ColliderChain;
 import com.huozhonghun.tank.enums.Group;
 
 import java.awt.*;
@@ -17,18 +18,20 @@ public class GameModel {
 
 	private Tank player;
 
-	public List<Tank> tankList = new ArrayList<Tank>();
+	public List<GameObject> gameObjects = new ArrayList<GameObject>();
 
-	public List<Bullet> bulletList = new ArrayList<Bullet>();
+	private static int tankCount = 0;
 
-	public List<Explosion> explosionList = new ArrayList<Explosion>();
+	private static int bulletCount = 0;
 
 	private GameModel() {
 
-		player = new Tank(150, 150, Group.GOOD);;
+		player = new Tank(150, 150, Group.GOOD);
+
+		// gameObjects.add(player);
 
 		for (int i = 0; i < 5; i++) {
-			tankList.add(new Tank(80 * i, 400, Group.BAD));
+			gameObjects.add(new Tank(80 * i, 400, Group.BAD));
 		}
 	}
 
@@ -44,32 +47,30 @@ public class GameModel {
 	public void paint(Graphics g) {
 		Color color = g.getColor();
 		g.setColor(Color.red);
+		gameObjects.forEach(o -> {
+			if(o instanceof Tank){
+				tankCount++;
+			}else if(o instanceof Bullet){
+				bulletCount++;
+			}
+		});
 		// 展示物体数量
-		g.drawString("敌军坦克数量：" + tankList.size(), 10, 50);
-		g.drawString("子弹数量：" + bulletList.size(), 10, 70);
+		g.drawString("敌军坦克数量：" + tankCount, 10, 50);
+		g.drawString("子弹数量：" + bulletCount, 10, 70);
 		// 设为原来的颜色，保证不影响其他对象
 		g.setColor(color);
 
 		player.paint(g);
-		// 遍历存活子弹
-		for (int i = 0; i < bulletList.size(); i++) {
-			bulletList.get(i).paint(g);
+		// 遍历物体对象
+		for (int i = 0; i < gameObjects.size(); i++) {
+			gameObjects.get(i).paint(g);
 		}
 
-		// 展示爆炸
-		for (int i = 0; i < explosionList.size(); i++) {
-			explosionList.get(i).paint(g);
-		}
-
-		// 创建敌军坦克
-		for (int i = 0; i < tankList.size(); i++) {
-			tankList.get(i).paint(g);
-		}
-
-		// 坦克碰撞，子弹碰撞
-		for (int i = 0; i < tankList.size(); i++) {
-			for (int j = 0; j < bulletList.size(); j++) {
-				tankList.get(i).collision(bulletList.get(j));
+		// 物体碰撞检测
+		for (int i = 0; i < gameObjects.size(); i++) {
+			for (int j = i+1; j < gameObjects.size(); j++) {
+				// 为了方便控制使用多个碰撞器, 使用了责任链
+				new ColliderChain().collide(gameObjects.get(i), gameObjects.get(j));
 			}
 		}
 

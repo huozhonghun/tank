@@ -10,7 +10,7 @@ import java.awt.*;
  * @author weichenglin
  * @create $2021-06-25-下午 02:24:15
  */
-public class Explosion {
+public class Explosion extends GameObject{
 
 	// 长度
 	public static int WIDTH = ResourceMgr.explodes[0].getWidth();
@@ -36,6 +36,6 @@ public class Explosion {
 
 	public void paint(Graphics g){
 		g.drawImage(ResourceMgr.explodes[status++], x, y, null);
-		if(status>=ResourceMgr.explodes.length) GameModel.getINSTANCE().explosionList.remove(this);
+		if(status>=ResourceMgr.explodes.length) GameModel.getINSTANCE().gameObjects.remove(this);
 	}
 }

@@ -16,7 +16,7 @@ public class OneDirFireStrategy implements FireStrategy {
 	@Override
 	public void fire(Tank t) {
 
-		GameModel.getINSTANCE().bulletList.add(new Bullet(t.getX() + t.WIDTH/2 - Bullet.WIDTH/2, t.getY() + t.HEIGHT/2 - Bullet.HEIGHT/2, t.getGroup(), t.getDir()));
+		GameModel.getINSTANCE().gameObjects.add(new Bullet(t.getX() + t.WIDTH/2 - Bullet.WIDTH/2, t.getY() + t.HEIGHT/2 - Bullet.HEIGHT/2, t.getGroup(), t.getDir()));
 
 		if(t.getGroup() == Group.GOOD){
 			// 开火发出声音

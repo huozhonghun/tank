@@ -18,7 +18,7 @@ public class FourDirFireStrategy implements FireStrategy {
 	public void fire(Tank t) {
 
 		for (DirectionEnum dir : DirectionEnum.values()) {
-			GameModel.getINSTANCE().bulletList.add(new Bullet(t.getX() + t.WIDTH/2 - Bullet.WIDTH/2, t.getY() + t.HEIGHT/2 - Bullet.HEIGHT/2, t.getGroup(), dir));
+			GameModel.getINSTANCE().gameObjects.add(new Bullet(t.getX() + t.WIDTH/2 - Bullet.WIDTH/2, t.getY() + t.HEIGHT/2 - Bullet.HEIGHT/2, t.getGroup(), dir));
 		}
 
 		if(t.getGroup() == Group.GOOD){

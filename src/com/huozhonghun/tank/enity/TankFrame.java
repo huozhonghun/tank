@@ -57,6 +57,7 @@ public class TankFrame extends Frame {
 		gm.paint(g);
 	}
 
+	// 解决双缓存，闪烁问题
 	Image offScreenImage = null;
 	@Override
 	public void update(Graphics g) {
