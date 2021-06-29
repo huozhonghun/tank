@@ -33,6 +33,10 @@ public class GameModel {
 		for (int i = 0; i < 5; i++) {
 			gameObjects.add(new Tank(80 * i, 400, Group.BAD));
 		}
+
+		gameObjects.add(new Wall(100, 100, 20, 20));
+		gameObjects.add(new Wall(300, 700, 50, 20));
+		gameObjects.add(new Wall(300, 500, 40, 600));
 	}
 
 	public static GameModel getINSTANCE() {
