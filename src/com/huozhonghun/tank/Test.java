@@ -11,7 +11,7 @@ public class Test {
 		TankFrame tankFrame = new TankFrame();
 
 		while (true){
-			System.out.println(2);
+			System.out.println(3);
 			Thread.sleep(10);
 			tankFrame.repaint();
 		}
