@@ -19,6 +19,7 @@ public class Test {
 		while (true){
 			Thread.sleep(10);
 			tankFrame.repaint();
+			System.out.println(6);
 		}
 	}
 }
